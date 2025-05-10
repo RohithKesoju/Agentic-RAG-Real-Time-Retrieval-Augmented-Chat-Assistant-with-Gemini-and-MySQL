@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent Chat</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .chat-container {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    #query {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+      overflow-x: auto;
+    }
+
+    #query:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #response-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 10px;
+      margin-top: 20px;
+    }
+
+    #response {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f1f9ff;
+      border-left: 4px solid #007BFF;
+      border-radius: 8px;
+      color: #333;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Ask Agent</h2>
+    <div id="response-container">
+      <p id="response"></p>
+    </div>
+    <div class="input-group">
+      <input type="text" id="query" placeholder="Ask your question" />
+      <button onclick="ask()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    async function ask() {
+      const query = document.getElementById("query").value;
+      const res = await fetch("/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.response;
+      
+      // Scroll to the bottom after the new response
+      const responseContainer = document.getElementById("response-container");
+      responseContainer.scrollTop = responseContainer.scrollHeight;
+    }
+  </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent Chat</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #query {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+      overflow-x: auto;
+    }
+
+    #query:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #response {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f1f9ff;
+      border-left: 4px solid #007BFF;
+      border-radius: 8px;
+      color: #333;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Ask Agent</h2>
+    <div class="input-group">
+      <input type="text" id="query" placeholder="Ask your question" />
+      <button onclick="ask()">Submit</button>
+    </div>
+    <p id="response"></p>
+  </div>
+
+  <script>
+    async function ask() {
+      const query = document.getElementById("query").value;
+      const res = await fetch("/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.response;
+    }
+  </script>
+</body>
+</html> -->

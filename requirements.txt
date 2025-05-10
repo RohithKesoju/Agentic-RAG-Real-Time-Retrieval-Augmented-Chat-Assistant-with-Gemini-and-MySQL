@@ -1,0 +1,6 @@
+aiohttp
+aiomysql
+fastapi
+uvicorn
+python-dotenv
+openai  # Works with Ollama's local OpenAI-compatible endpoint
