@@ -32,7 +32,7 @@ agentic_rag/
 ├── .env                         # Environment variables (API keys, DB URL)
 └── requirements.txt             # Python dependencies
 ```
-##How It Works
+## How It Works
 - Daily Pipeline pulls external data (e.g., news, documents, records) and stores them in MySQL.
 - User queries are received via the FastAPI /query endpoint.
 - A Gemini-based agent processes the query using:
@@ -40,7 +40,7 @@ agentic_rag/
 - The knowledge stored from recent pipeline data
 - The response is returned and displayed via the chat UI.
 
-##Setup
+## Setup
 ```bash
 git clone https://github.com/RohithKesoju/agentic_rag.git
 cd agentic_rag
@@ -48,12 +48,12 @@ python -m venv venv
 venv\Scripts\activate   # On Windows
 pip install -r requirements.txt
 ```
-##Run the App
+## Run the App
 ```bash
 uvicorn api.main:app --reload
 ```
 
-##Results
+## Results
 ![Output1](https://github.com/user-attachments/assets/50e2c030-aed4-4f6e-9ff7-6e01c25df8ad)
 
 ![Output2](https://github.com/user-attachments/assets/793a968e-9a01-41da-a833-dbefea2d7a0e)
