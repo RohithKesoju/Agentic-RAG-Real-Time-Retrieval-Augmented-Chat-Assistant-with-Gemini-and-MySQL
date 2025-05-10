@@ -64,19 +64,3 @@ async def run_agent(query: str) -> str:
         return response.text
     except Exception as e:
         return f"Error: {str(e)}"
-
-
-
-# import openai
-# from openai import AsyncOpenAI
-
-# client = AsyncOpenAI(api_key="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")  # OR use environment variable
-
-# async def run_agent(query: str) -> str:
-#     response = await client.chat.completions.create(
-#         model="gpt-3.5-turbo",  # or "gpt-4"
-#         messages=[
-#             {"role": "user", "content": query}
-#         ]
-#     )
-#     return response.choices[0].message.content.strip()
