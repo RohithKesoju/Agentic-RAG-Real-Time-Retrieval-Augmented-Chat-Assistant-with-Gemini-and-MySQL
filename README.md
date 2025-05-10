@@ -18,19 +18,28 @@ This project is a **User-Facing Chat-style Agentic Retrieval-Augmented Generatio
 ## Project Structure
 
 ```bash
-agentic_rag/
-├── agent/
-│   └── agent_handler.py         # Gemini API calls and agent logic
-├── api/
-│   └── main.py                  # FastAPI app with /query endpoint
-├── data/
-│   └── pipeline.py              # Async daily pipeline to fetch & store data
+base_folder/
+│
+├── data_pipeline/
+│   ├── download_data.py       # Downloads raw data from API
+│   ├── process_data.py        # Parses and inserts data into MySQL
+│   └── run_pipeline.py        # Runs the pipeline manually
+│
 ├── database/
-│   └── mysql_utils.py           # MySQL setup and data operations
-├── static/
-│   └── index.html               # Minimal chat UI
-├── .env                         # Environment variables (API keys, DB URL)
-└── requirements.txt             # Python dependencies
+│   └── mysql_connection.py    # Async MySQL connection
+│
+├── agent/
+│   ├── functions.py           # Tool functions like `query_executive_orders`
+│   └── agent_handler.py       # Handles LLM interaction & tool execution
+│
+├── api/
+│   └── main.py                # FastAPI backend
+│
+├── ui/
+│   └── index.html             # Simple UI for user query
+│
+├── .env                       # Contains secrets (DB, Ollama URL)
+└── requirements.txt           # Dependencies
 ```
 ## How It Works
 - Daily Pipeline pulls external data (e.g., news, documents, records) and stores them in MySQL.
